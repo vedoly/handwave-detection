@@ -16,8 +16,8 @@ def skeletonPlot(arr):
     l_arm =np.swapaxes( np.array([arr[20],arr[8],arr[9] ] )   ,0,1)
     r_arm = np.swapaxes( np.array([arr[20],arr[4],arr[5]])    ,0,1)
     
-    # l_hand = np.swapaxes(np.array([arr[7],arr[21],arr[22]])    ,0,1)
-    # r_hand = np.swapaxes(np.array([arr[11],arr[23],arr[24]])  ,0,1)
+    l_hand = np.swapaxes(np.array([arr[7],arr[21],arr[22]])    ,0,1)
+    r_hand = np.swapaxes(np.array([arr[11],arr[23],arr[24]])  ,0,1)
     
     head = np.swapaxes(np.array([arr[3]]),0,1) 
 
@@ -32,8 +32,8 @@ def skeletonPlot(arr):
     ax.plot(l_arm[0],l_arm[2],'.-')
     ax.plot(r_arm[0],r_arm[2],'.-')
 
-    # ax.plot(l_hand[0],l_hand[2],'.')
-    # ax.plot(r_hand[0],r_hand[2],'.')
+    ax.plot(l_hand[0],l_hand[2],'.')
+    ax.plot(r_hand[0],r_hand[2],'.')
     ax.plot(head[0],head[2],'ro',markersize=15)
     plt.show()
     
@@ -57,28 +57,22 @@ def armPlot(arr):
     plt.show()
     
     
-def wavePlot(A):
+def wavePlot(AngleA):
    
     # f(figsize=(100,100))
  
-    
-    AngleA = [ [] for i in range(4)]
-    f, axes = plt.subplots(len(AngleA), 1)
+   
+    f, axes = plt.subplots(len(AngleA))
     f.subplots_adjust(hspace=1)
 
-    for c in A:
-        AngleA[0].append(findAngleR(c[3],c[4],c[5]))
-        AngleA[1].append(findAngleR(c[4],c[3],c[0]))
-        AngleA[2].append(findAngleL(c[1],c[0],c[3]))
-        AngleA[3].append(findAngleL(c[0],c[1],c[2]))
-
+  
     name = ['left elbow','left shoulder','right shoulder','right elbow']
 
 
     for i in range(len(AngleA)):
-        axes[i][0].title.set_text(name[i])
-        axes[i][0].plot(AngleA[i])
-        axes[i][0].set_ylim(0, 360)
+        axes[i].title.set_text(name[i])
+        axes[i].plot(AngleA[i])
+        axes[i].set_ylim(0, 360)
 
-    f.savefig("somefile.png")
+   
 
