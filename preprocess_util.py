@@ -53,5 +53,8 @@ def augment(A):
     for i in range(len(A)):
         for j in range(0, 300-120, 50):
             out.append(A[i][:, j:j+120])
-            out.append(A[i][:, j:j+120][::-1])
-    return out
+            if j == 0:
+                out.append(A[i][:, j+119::-1])
+            else:
+                out.append(A[i][:, j+119:j-1:-1])
+    return np.array(out)
